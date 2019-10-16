@@ -32,4 +32,14 @@ public class MapService {
         return mapListA;
     }
 
+    public static boolean isSquare(String stringMap) {
+        int size = stringMap.length();
+        double sqrt = Math.sqrt(size);
+        double decimal = sqrt % 1;
+
+        if(decimal == 0 && size >= 4) {
+            return true;
+        }
+        return false;
+    }
 }

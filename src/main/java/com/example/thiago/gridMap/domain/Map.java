@@ -13,4 +13,7 @@ public class Map {
 
     public String getMapCoord() { return mapCoord; }
 
+    public boolean less(String mapCoord) {
+        return !(mapCoord.length() >= 4);
+    }
 }

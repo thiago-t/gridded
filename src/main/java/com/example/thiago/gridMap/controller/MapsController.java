@@ -19,10 +19,10 @@ public class MapsController {
     public final MapService service = new MapService();
 
     @GetMapping("/{mapId}") // list map info by mapId
-    public ResponseEntity<Map>get(@PathVariable int mapId) {
+    public ResponseEntity<Map> get(@PathVariable int mapId) {
         Map map = service.get(mapId);
 
-        if(map == null) {
+        if (map == null) {
             return notFound().build();
         }
 
@@ -40,18 +40,11 @@ public class MapsController {
     }
 
     @PostMapping
-    public ArrayList<ArrayList<Character>> newMap(@RequestParam("stringMap") String stringMap) {
-        /*ArrayList<ArrayList<Character>> mapListA = new ArrayList<>();
-        double sqrt = Math.sqrt(stringMap.length());
+    public ResponseEntity newMap(@RequestParam("stringMap") String stringMap) {
 
-        for(int i=0; i<sqrt; i++) {
-            ArrayList<Character> mapListB = new ArrayList<>();
-            for(int k=0; k<sqrt; k++) {
-                mapListB.add(stringMap.charAt((int)sqrt*i+k));
-            }
-            mapListA.add(mapListB);
+        if (!service.isSquare(stringMap)) {
+            return ResponseEntity.badRequest().body("It must be a square");
         }
-        return mapListA;*/
-        return service.createMap(stringMap);
+        return ok(service.createMap(stringMap));
     }
 }
